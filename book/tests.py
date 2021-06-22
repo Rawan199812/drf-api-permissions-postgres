@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from .models import Book
+from django.contrib.auth.models import User
 
 # Create your tests here.
 
@@ -11,7 +12,7 @@ class PostModelTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        test_user = get_user_model().objects.create_user(username='tester',password='pass')
+        test_user = User.objects.create_user(username='tester',password='pass')
         test_user.save()
 
         test_book = Book.objects.create(
@@ -29,3 +30,6 @@ class PostModelTests(TestCase):
         self.assertEqual(book.title, 'Harry Potter')
         self.assertEqual(book.comment, 'nice')
         self.assertEqual(book.type, 'Fantasy Fiction, Drama series of novels')
+
+
+
